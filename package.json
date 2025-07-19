@@ -9,6 +9,7 @@
     "dev": "nest start --watch",
     "build:server": "nest build",
     "build:web": "cd web && npm i && npm run build && npm prune --production",
+    "build:all": "npm run build:server && npm run build:web",
     "start": "node dist/main"
   },
   "dependencies": {
