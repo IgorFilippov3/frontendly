@@ -1,0 +1,52 @@
+.sandpack-console {
+  height: 400px;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  transition: height 300ms ease-in-out;
+}
+
+.sandpack-console.collapsed {
+  height: 0;
+}
+
+.sandpack-console__container {
+  flex: 1;
+  overflow: auto;
+  background-color: #242424ff;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+.sandpack-console__container.collapsed {
+  padding-top: 0;
+  padding-bottom: 0;
+}
+
+.sandpack-console__toggle {
+  cursor: pointer;
+  align-self: flex-end;
+  padding: 0.75rem;
+  background-color: #e5e7eb;
+  border-radius: 9999px;
+  transition: background-color 0.2s ease;
+  outline: none;
+  position: absolute;
+  top: 0;
+  right: 10px;
+  transform: translateY(-110%);
+}
+
+.sandpack-console__toggle:hover {
+  background-color: #d1d5db;
+}
+
+.sandpack-console__toggle:focus {
+  outline: none;
+}
+
+.sandpack-console__toggle-icon {
+  width: 1rem;
+  height: 1rem;
+  color: #374151;
+}

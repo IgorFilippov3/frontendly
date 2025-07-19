@@ -1,0 +1,36 @@
+.custom-layout {
+  height: calc(100vh - 60px);
+  border-radius: 0 !important;
+  background-color: #282c34 !important;
+}
+
+.custom-tabs {
+  background-color: #151515 !important;
+  border-bottom: 1px solid #151515 !important;
+}
+
+.custom-tab {
+  font-size: 16px !important;
+  font-family: var(--font-base) !important;
+}
+
+.custom-navigator {
+  background-color: #151515 !important;
+  border-bottom: 1px solid #151515 !important;
+}
+
+.custom-console {
+  height: 300px !important;
+}
+
+.custom-code-editor {
+  --sp-font-size: 15px;
+
+  height: calc(100vh - 60px) !important;
+  margin: 0 !important;
+  font-size: 15px !important;
+}
+
+.custom-file-explorer {
+  font-size: 15px !important;
+}
