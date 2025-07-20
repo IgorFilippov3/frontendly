@@ -15,6 +15,7 @@ import {
 } from "express";
 import { CreateUserDto } from "src/_core/dto/users/create-user.dto";
 import { LoginUserDto } from "src/_core/dto/users/login-user.dto";
+import { UserDto } from "src/_core/dto/users/user.dto";
 import { UserEntity } from "src/_core/entities/user.entity";
 import { AuthService } from "src/_core/services/auth.service";
 import { UsersService } from "src/_core/services/users.service";
@@ -30,10 +31,15 @@ export class AuthController {
   ) {}
 
   @Get("me")
-  async me(@GetUserId() userId: number): Promise<{ user: UserEntity | null }> {
+  async me(@GetUserId() userId: number): Promise<{ user: UserDto | null }> {
     const user: UserEntity | null = await this.usersService.me(userId);
 
-    return { user };
+    if (!user) return { user: null };
+
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    const { password, ...rest } = user;
+
+    return { user: rest };
   }
 
   @Post("login")
