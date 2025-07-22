@@ -1,7 +1,7 @@
 import "./sandbox.css";
 
 import type { File } from "@/types/files/file";
-import type { TutorialContentType } from "@/types/tutorial/tutorial-content-type";
+import { TutorialContentType } from "@/types/tutorial/tutorial-content-type";
 
 import { atomDark } from "@codesandbox/sandpack-themes";
 import { autocompletion, completionKeymap } from "@codemirror/autocomplete";
@@ -34,7 +34,7 @@ export const Sandbox = ({ files, contentType }: SandboxProps) => {
   return (
     <SandpackProvider
       key={filesKey}
-      files={getFileTree(files)}
+      files={getFileTree(files, contentType)}
       template={getTemplate(contentType)}
       theme={atomDark}
       options={{
@@ -67,7 +67,6 @@ export const Sandbox = ({ files, contentType }: SandboxProps) => {
           showNavigator={true}
           showOpenInCodeSandbox={false}
         >
-          {/* <SandpackConsole actionsChildren={[<Button>Open/Close1</Button>]} /> */}
           <SandpackConsole />
         </SandpackPreview>
       </SandpackLayout>

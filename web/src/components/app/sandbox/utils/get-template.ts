@@ -18,6 +18,8 @@ export function getTemplate(
       return "react-ts";
     case TutorialContentType.angular:
       return "angular";
+    case TutorialContentType.solid:
+      return "vite-react-ts";
     default:
       throw new Error("Invalid tutorial content type");
   }

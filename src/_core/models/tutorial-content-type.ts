@@ -6,4 +6,5 @@ export enum TutorialContentType {
   reactjs = "reactjs",
   reactts = "reactts",
   angular = "angular",
+  solid = "solid",
 }

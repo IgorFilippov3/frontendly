@@ -6,6 +6,7 @@ import { JsIcon } from "./components/js-icon";
 import { TsIcon } from "./components/ts-icon";
 import { ReactIcon } from "./components/react-icon";
 import { AngularIcon } from "./components/angular-icon";
+import { SolidJSIcon } from "./components/solidjs-icon";
 
 const iconMap = {
   [TutorialContentType.html]: HtmlIcon,
@@ -15,6 +16,7 @@ const iconMap = {
   [TutorialContentType.reactjs]: ReactIcon,
   [TutorialContentType.reactts]: ReactIcon,
   [TutorialContentType.angular]: AngularIcon,
+  [TutorialContentType.solid]: SolidJSIcon,
 } as const;
 
 interface TutorialContentTypeIconProps extends IconProps {

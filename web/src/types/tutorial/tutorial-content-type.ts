@@ -8,6 +8,7 @@ export enum TutorialContentType {
   reactjs = "reactjs",
   reactts = "reactts",
   angular = "angular",
+  solid = "solid",
 }
 
 export type TutorialContentTypeItem = CollectionType<TutorialContentType>;
@@ -20,6 +21,7 @@ export const tutorialContentTypeItems: TutorialContentTypeItem[] = [
   { value: TutorialContentType.reactjs, displayName: "React Javascript" },
   { value: TutorialContentType.reactts, displayName: "React Typescript" },
   { value: TutorialContentType.angular, displayName: "Angular" },
+  { value: TutorialContentType.solid, displayName: "SolidJS" },
 ];
 
 export function getTutorialContentTypeItems(): TutorialContentTypeItem[] {
