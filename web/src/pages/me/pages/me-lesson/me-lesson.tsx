@@ -145,7 +145,6 @@ const MeLesson = () => {
           onChange={(value) => setTaskMarkdown(value)}
           height="100%"
           commands={[]}
-          extraCommands={[]}
         />
       </div>
       <div className="flex justify-between items-center py-6">
