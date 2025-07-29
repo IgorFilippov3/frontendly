@@ -23,6 +23,7 @@ import { TutorialDifficultyLevel } from "src/_core/models/tutorial-difficulty-le
 import { LessonsService } from "src/_core/services/lessons.service";
 import { TutorialsService } from "src/_core/services/tutorials.service";
 import { UsersService } from "src/_core/services/users.service";
+import { findObjectWithMinOrder } from "src/_core/utils/findObjectWithMinOrder";
 import { GetUserId } from "src/_core/utils/get-user-id";
 
 @Controller("tutorials")
@@ -93,7 +94,7 @@ export class TutorialsController {
 
     const currentLesson =
       lessonKey === "__first_lesson_key__"
-        ? tutorial.lessons[0]
+        ? findObjectWithMinOrder(tutorial.lessons)
         : tutorial.lessons.find((l: LessonEntity) => l.key === lessonKey);
 
     if (!currentLesson) {
