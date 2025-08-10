@@ -1,12 +1,15 @@
 .custom-layout {
-  height: calc(100vh - 60px);
-  border-radius: 0 !important;
-  background-color: #282c34 !important;
+  height: calc(100vh - 84px);
+
+  --sp-colors-surface2: #000000;
+  --sp-border-radius: 12px;
+  --sp-layout-height: 100%;
+
+  border: 1px solid #444 !important;
 }
 
 .custom-tabs {
-  background-color: #151515 !important;
-  border-bottom: 1px solid #151515 !important;
+  display: none;
 }
 
 .custom-tab {
@@ -26,7 +29,6 @@
 .custom-code-editor {
   --sp-font-size: 15px;
 
-  height: calc(100vh - 60px) !important;
   margin: 0 !important;
   font-size: 15px !important;
 }

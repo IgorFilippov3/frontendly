@@ -1,16 +1,11 @@
 .tutorial-task {
-  position: absolute;
-  top: 60px;
-  right: 0;
-  width: 50%;
-  height: calc(100vh - 60px);
+  width: 100%;
+  height: calc(100vh - 84px);
+  border-radius: 12px;
+  border: 1px solid #444;
   background-color: #ffffff;
   z-index: 100;
   padding: 24px 16px;
   overflow-y: auto;
   overflow-x: hidden;
-}
-
-.tutorial-task.hidden {
-  display: none;
 }

@@ -1,22 +1,11 @@
 import "./tutorial-header.css";
 
 import { useState } from "react";
-import {
-  ChevronDown,
-  ChevronLeft,
-  BookOpen,
-  X,
-  ChevronRight,
-} from "lucide-react";
+import { ChevronDown, ChevronLeft, BookOpen, ChevronRight } from "lucide-react";
 import type { Tutorial } from "@/types/tutorial/tutorial";
 import type { Lesson } from "@/types/lessons/lesson";
-import { useDispatch, useSelector } from "react-redux";
-import { type AppDispatch, type RootState } from "@/store";
-import {
-  closeTutorialTask,
-  openTutorialTask,
-} from "@/store/tutorials/tutorials-slice";
 import { useNavigate } from "react-router-dom";
+import { useLessonNavigation } from "./hooks/useLessonNavigation";
 
 interface TutorialHeaderProps {
   tutorial: Tutorial;
@@ -29,36 +18,29 @@ export const TutorialHeader = ({
   currentLesson,
   baseUrl,
 }: TutorialHeaderProps) => {
-  const dispatch = useDispatch<AppDispatch>();
   const navigate = useNavigate();
-  const { isTutorialTaskOpen } = useSelector(
-    (state: RootState) => state.tutorials,
-  );
   const [isDropdownOpen, setIsDropdownOpen] = useState<boolean>(false);
 
-  const currentLessonIndex = tutorial.lessons.findIndex(
-    (l: Lesson) => l.id === currentLesson.id,
-  );
+  const {
+    sortedLessons,
+    navigateToPreviousLesson,
+    navigateToNextLesson,
+    navigateToLesson,
+    canNavigatePrevious,
+    canNavigateNext,
+  } = useLessonNavigation({
+    tutorial,
+    currentLesson,
+    baseUrl,
+  });
 
   const handleLessonSelect = (lesson: Lesson) => {
-    navigate(`${baseUrl}/${lesson.key}`);
+    navigateToLesson(lesson);
     setIsDropdownOpen(false);
   };
 
   const handleBack = () => {
     navigate("/");
-  };
-
-  const toggleTask = () => {
-    dispatch((isTutorialTaskOpen ? closeTutorialTask : openTutorialTask)());
-  };
-
-  const navigateToLessonByIndex = (lessonIndex: number) => {
-    const lesson: Lesson | undefined = tutorial.lessons[lessonIndex];
-
-    if (lesson) {
-      navigate(`${baseUrl}/${lesson.key}`);
-    }
   };
 
   return (
@@ -72,13 +54,13 @@ export const TutorialHeader = ({
           <span className="text-base">Back</span>
         </button>
 
-        <div className="text-white font-medium text-base flex items-center space-x-2 tutorial-name">
+        <div className="text-white font-medium text-base flex items-center space-x-2">
           <BookOpen size={16} />
           <span>{tutorial.name}</span>
         </div>
       </div>
 
-      <div className="flex items-center space-x-2 tutorial-lesson">
+      <div className="flex items-center space-x-2">
         <div className="relative">
           <button
             onClick={() => setIsDropdownOpen(!isDropdownOpen)}
@@ -93,7 +75,7 @@ export const TutorialHeader = ({
 
           {isDropdownOpen && (
             <div className="absolute top-full left-0 mt-1 bg-gray-800 border border-gray-600 rounded shadow-lg min-w-[200px] z-50">
-              {tutorial.lessons.map((lesson, index) => (
+              {sortedLessons.map((lesson, index) => (
                 <button
                   key={index}
                   onClick={() => handleLessonSelect(lesson)}
@@ -112,40 +94,21 @@ export const TutorialHeader = ({
 
         <div className="flex items-center space-x-1">
           <button
-            disabled={currentLessonIndex === 0}
+            disabled={!canNavigatePrevious}
             className="cursor-pointer flex items-center justify-center w-8 h-8 text-gray-300 hover:text-white transition-colors bg-gray-800 hover:bg-gray-700 rounded disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:bg-gray-800 disabled:hover:text-gray-300"
-            onClick={() => navigateToLessonByIndex(currentLessonIndex - 1)}
+            onClick={navigateToPreviousLesson}
           >
             <ChevronLeft size={16} />
           </button>
 
           <button
-            disabled={currentLessonIndex === tutorial.lessons.length - 1}
+            disabled={!canNavigateNext}
             className="cursor-pointer flex items-center justify-center w-8 h-8 text-gray-300 hover:text-white transition-colors bg-gray-800 hover:bg-gray-700 rounded disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:bg-gray-800 disabled:hover:text-gray-300"
-            onClick={() => navigateToLessonByIndex(currentLessonIndex + 1)}
+            onClick={navigateToNextLesson}
           >
             <ChevronRight size={16} />
           </button>
         </div>
-      </div>
-
-      <div className="flex items-center ml-auto">
-        <button
-          onClick={toggleTask}
-          className={`flex items-center space-x-1 px-3 py-1 rounded text-base transition-colors bg-blue-600 hover:bg-blue-700 text-white`}
-        >
-          {isTutorialTaskOpen ? (
-            <>
-              <X size={14} />
-              <span>Close task</span>
-            </>
-          ) : (
-            <>
-              <BookOpen size={14} />
-              <span>Open task</span>
-            </>
-          )}
-        </button>
       </div>
 
       {isDropdownOpen && (

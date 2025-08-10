@@ -1,0 +1,36 @@
+.codePreviewSwitcher {
+  display: inline-flex;
+  gap: 6px;
+  background-color: #2d2d2d;
+  border-radius: 8px;
+  padding: 4px 6px;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.codePreviewSwitcherButton {
+  padding: 8px 16px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  background-color: transparent;
+  color: #888;
+  font-size: inherit;
+  font-weight: inherit;
+  outline: none;
+  user-select: none;
+}
+
+.codePreviewSwitcherButton.active {
+  background-color: #1860fa;
+  color: #ffffff;
+}
+
+.codePreviewSwitcherButton.active:hover {
+  background-color: #1447e6;
+}
+
+.codePreviewSwitcher.inactive {
+  color: #888;
+}

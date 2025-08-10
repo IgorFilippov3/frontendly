@@ -4,36 +4,27 @@ import type { File } from "@/types/files/file";
 import { TutorialContentType } from "@/types/tutorial/tutorial-content-type";
 
 import { atomDark } from "@codesandbox/sandpack-themes";
-import { autocompletion, completionKeymap } from "@codemirror/autocomplete";
-import { abbreviationTracker } from "@emmetio/codemirror6-plugin";
 import {
-  SandpackCodeEditor,
   SandpackFileExplorer,
   SandpackLayout,
-  SandpackPreview,
   SandpackProvider,
 } from "@codesandbox/sandpack-react";
 import { getFileTree } from "./utils/get-file-tree";
 import { getTemplate } from "./utils/get-template";
-import { useMemo } from "react";
-import { SandpackConsole } from "./components/sandpack-console";
+import { SandpackHeader } from "./components/sandpack-header/sandpack-header";
+import { SandpackMain } from "./components/sandpack-main/sandpack-main";
+import { memo } from "react";
 
 interface SandboxProps {
   contentType: TutorialContentType;
   files: File[] | undefined;
 }
 
-export const Sandbox = ({ files, contentType }: SandboxProps) => {
-  // This is necessary to prevent the preview from caching the old build
-  const filesKey = useMemo(() => {
-    return btoa(JSON.stringify(files)).slice(0, 10);
-  }, [files]);
-
+export const Sandbox = memo(({ files, contentType }: SandboxProps) => {
   if (!files) return null;
 
   return (
     <SandpackProvider
-      key={filesKey}
       files={getFileTree(files, contentType)}
       template={getTemplate(contentType)}
       theme={atomDark}
@@ -52,24 +43,10 @@ export const Sandbox = ({ files, contentType }: SandboxProps) => {
       }}
     >
       <SandpackLayout>
+        <SandpackHeader />
         <SandpackFileExplorer />
-        <SandpackCodeEditor
-          wrapContent
-          extensions={[autocompletion(), abbreviationTracker()]}
-          extensionsKeymap={[completionKeymap] as never}
-          showTabs={true}
-          closableTabs={true}
-          showLineNumbers={true}
-          className="custom-code-editor"
-        />
-        <SandpackPreview
-          style={{ height: "100%" }}
-          showNavigator={true}
-          showOpenInCodeSandbox={false}
-        >
-          <SandpackConsole />
-        </SandpackPreview>
+        <SandpackMain />
       </SandpackLayout>
     </SandpackProvider>
   );
-};
+});

@@ -1,25 +1,36 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { TutorialActivePanel } from "@/types/tutorial/tutorial-active-panel";
+import { TutorialTaskPosition } from "@/types/tutorial/tutorial-task-position";
+import { createSlice, type PayloadAction } from "@reduxjs/toolkit";
 
 interface TutorialsState {
-  isTutorialTaskOpen: boolean;
+  tutorialTaskPosition: TutorialTaskPosition;
+  tutorialActivePanel: TutorialActivePanel;
 }
 
 const initialState: TutorialsState = {
-  isTutorialTaskOpen: true,
+  tutorialTaskPosition: TutorialTaskPosition.left,
+  tutorialActivePanel: TutorialActivePanel.code,
 };
 
 const tutorialsSlice = createSlice({
   name: "tutorials-slice",
   initialState,
   reducers: {
-    openTutorialTask(state: TutorialsState) {
-      state.isTutorialTaskOpen = true;
+    setTutorialTaskPosition(
+      state: TutorialsState,
+      action: PayloadAction<TutorialTaskPosition>,
+    ) {
+      state.tutorialTaskPosition = action.payload;
     },
-    closeTutorialTask(state: TutorialsState) {
-      state.isTutorialTaskOpen = false;
+    setTutorialActivePanel(
+      state: TutorialsState,
+      action: PayloadAction<TutorialActivePanel>,
+    ) {
+      state.tutorialActivePanel = action.payload;
     },
   },
 });
 
-export const { openTutorialTask, closeTutorialTask } = tutorialsSlice.actions;
+export const { setTutorialActivePanel, setTutorialTaskPosition } =
+  tutorialsSlice.actions;
 export default tutorialsSlice.reducer;

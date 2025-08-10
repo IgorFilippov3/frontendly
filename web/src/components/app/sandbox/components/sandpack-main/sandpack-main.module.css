@@ -1,0 +1,13 @@
+.editor {
+  margin: 0 !important;
+  font-size: 15px !important;
+}
+
+.preview {
+  height: 100% !important;
+}
+
+.editor.hidden,
+.preview.hidden {
+  display: none;
+}

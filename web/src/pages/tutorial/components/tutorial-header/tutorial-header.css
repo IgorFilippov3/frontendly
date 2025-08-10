@@ -3,13 +3,3 @@
   height: 60px;
   background-color: hsl(220 10% 20%);
 }
-
-.tutorial-name {
-  position: relative;
-  top: 1px;
-}
-
-.tutorial-lesson {
-  position: relative;
-  top: 1px;
-}

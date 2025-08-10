@@ -1,0 +1,22 @@
+.tutorial {
+  background-color: #000000;
+  min-height: 100vh;
+}
+
+.tutorialContent {
+  display: flex;
+  gap: 8px;
+  padding: 12px;
+}
+
+.tutorialContentReversed {
+  flex-flow: row-reverse;
+}
+
+.tutorialTask {
+  width: 40%;
+}
+
+.tutorialSandbox {
+  width: 60%;
+}
